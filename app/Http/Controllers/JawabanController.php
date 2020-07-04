@@ -9,7 +9,7 @@ class JawabanController extends Controller
 {
     public function index(){
     	$jawaban =  JawabanModel::get_all();
-    	return view('jawaban.index');
+    	return view('jawaban.index',compact('jawaban'));
     }
 
     public function create(){
@@ -17,15 +17,25 @@ class JawabanController extends Controller
     }
 
     public function store(Request $request){
-    	$data = $request->all();
-    	unset($data["_token"]);
-    	$jawaban = JawabanModel::save($data);
-    	if($jawaban){
+    	//$data = $request->all();
+    	//unset($data["_token"]);
+    	$new_jawaban = JawabanModel::save($request->all());
     		return redirect('/jawaban');
-    	}
-    }  
+    } 
 
-    public function show($pertanyaan_id){
-    	
+    public function edit($id){
+        $jawaban = JawabanModel::find_by_id($id);
+        return view('jawaban.edit', compact('jawaban'));
     }
+
+    public function update($id, Request $request){
+        $jawaban = JawabanModel::update($id, $request->all());
+        return redirect('/jawaban');
+    }
+
+    public function destroy($id){
+        $deleted = JawabanModel::destroy($id);
+        return redirect('/jawaban');
+    }
+
 }

@@ -34,6 +34,9 @@
   	<a href="/pertanyaan/create" class="btn btn-primary">
 		Create new Pertanyaan
 	</a>
+  <a href="/jawaban" class="btn btn btn-warning">
+  jawaban
+</a>
 </div>
 
 @endsection
